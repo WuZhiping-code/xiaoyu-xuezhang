@@ -1071,8 +1071,8 @@ async function sendAIChat(){
   } catch (err) {
     console.error('AI对话异常:', err);
     botCursor.remove();
-    botContent.textContent = err.message || '网络请求失败，请检查后端服务是否启动';
-    hint.textContent = '⚠️ 请确认后端服务已启动（http://localhost:8080）';
+    botContent.textContent = '⏳ 服务器正在唤醒中（免费版休眠恢复需30-60秒），请稍等5秒后重新提问即可～';
+    hint.textContent = '💡 如果提示Load failed，等几秒再试一次就好（服务器刚睡醒）';
   } finally {
     sendBtn.disabled = false;
     isAIStreaming = false;
