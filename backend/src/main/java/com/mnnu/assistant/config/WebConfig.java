@@ -39,10 +39,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOriginPatterns("*")       // 允许所有来源（生产环境建议限制具体域名）
+                .allowedOriginPatterns("*")       // 允许所有来源
                 .allowedMethods("GET", "POST", "OPTIONS")
                 .allowedHeaders("*")
-                .allowCredentials(true)
+                .allowCredentials(false)           // 手机端必须为false配合通配符
                 .maxAge(3600);
     }
 }
