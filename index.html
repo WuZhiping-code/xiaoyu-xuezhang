@@ -391,7 +391,7 @@ body::before{
     <div class="quick-btns">
       <button class="quick-btn" onclick="quickAskAI('闽南师范大学的招生分数线是多少？')"><span class="icon">📊</span>招生分数线</button>
       <button class="quick-btn" onclick="quickAskAI('闽南师范大学有哪些专业？')"><span class="icon">📚</span>专业设置</button>
-      <button class="quick-btn" onclick="quickAskAI('闽南师范大学的宿舍条件怎么样？')"><span class="icon">🏠</span>住宿条件</button>
+      <button class="quick-btn" onclick="quickAskAI('闽南师范大学宿舍条件怎么样？几人间？有没有空调卫浴？')"><span class="icon">🏠</span>住宿条件</button>
       <button class="quick-btn" onclick="quickAskAI('闽南师范大学北江滨校区地图和校园分布')"><span class="icon">📍</span>学校地址</button>
     </div>
   </div>
@@ -1054,12 +1054,16 @@ async function sendAIChat(){
       }
     }
 
-    // 5. 完成 — 追加学长微信二维码 + 地图（如涉及）
+    // 5. 完成 — 追加学长微信二维码 + 地图（如涉及）+ 宿舍实景引导
     botCursor.remove();
     let suffix = '<br><br><div style="text-align:center;border-top:1px solid #e8ddd0;padding-top:10px;margin-top:6px"><img src="小羽学长微信.jpg" alt="小羽学长微信" style="width:140px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1)"><br><span style="font-size:12px;color:#C41E3A">📲 扫码咨询学长：K051002e</span></div>';
     // 如果问题涉及地图/校区分布，追加拿校区地图
     if(/地图|校区.*分布|校区.*图|北江滨|校园.*图|平面图|鸟瞰/.test(question)){
       suffix = '<br><br><div style="text-align:center;border-top:1px solid #e8ddd0;padding-top:10px;margin-top:6px"><b>🗺️ 北江滨校区地图</b><br><img src="北江滨校区地图.jpg" alt="北江滨校区地图" style="width:100%;max-width:320px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);margin:6px 0" onclick="this.style.maxWidth=this.style.maxWidth===\'100%\'?\'none\':\'100%\'"></div>' + suffix;
+    }
+    // 如果涉及宿舍/住宿/环境，追加实景引导
+    if(/宿舍|住宿|寝室|上床下桌|几人间|达理|瑞京|白宫|圆山|床铺|卫浴/.test(question)){
+      suffix = '<br><br><div style="text-align:center;border-top:1px solid #fff0f0;padding-top:12px;margin-top:8px;background:#fdf5f5;border-radius:12px;padding:12px"><span style="font-size:14px">🏠 <b>想看宿舍实景图和视频？</b></span><br><span style="font-size:13px;color:#C41E3A">加学长微信，发你各宿舍区实拍！</span><br><img src="小羽学长微信.jpg" alt="小羽学长微信" style="width:130px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);margin:8px 0"><br><span style="font-size:13px;font-weight:700;color:#C41E3A">📲 微信：K051002e</span></div>' + suffix;
     }
     botContent.innerHTML = fullText + suffix;
     hint.textContent = '💡 试试问：宿舍有空调吗？ | 学费多少？ | 就业率如何？';
@@ -1151,6 +1155,9 @@ async function sendAI(){
       let suffix2 = '<br><br><div style="text-align:center;border-top:1px solid #e8ddd0;padding-top:10px;margin-top:6px"><img src="小羽学长微信.jpg" alt="小羽学长微信" style="width:120px;border-radius:10px"><br><span style="font-size:11px;color:#C41E3A">📲 扫码咨询学长：K051002e</span></div>';
       if(/地图|校区.*分布|校区.*图|北江滨|校园.*图|平面图|鸟瞰/.test(q)){
         suffix2 = '<br><br><div style="text-align:center;border-top:1px solid #e8ddd0;padding-top:10px;margin-top:6px"><b>🗺️ 北江滨校区地图</b><br><img src="北江滨校区地图.jpg" alt="北江滨校区地图" style="width:100%;max-width:280px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);margin:6px 0"></div>' + suffix2;
+      }
+      if(/宿舍|住宿|寝室|上床下桌|几人间|达理|瑞京|白宫|圆山|床铺|卫浴/.test(q)){
+        suffix2 = '<br><br><div style="text-align:center;border-top:1px solid #fff0f0;padding-top:12px;margin-top:8px;background:#fdf5f5;border-radius:12px;padding:12px"><span style="font-size:13px">🏠 <b>想看宿舍实景图和视频？</b></span><br><span style="font-size:12px;color:#C41E3A">加学长微信，发你各宿舍区实拍！</span><br><img src="小羽学长微信.jpg" alt="小羽学长微信" style="width:110px;border-radius:10px;margin:6px 0"><br><span style="font-size:12px;font-weight:700;color:#C41E3A">📲 微信：K051002e</span></div>' + suffix2;
       }
       botText.innerHTML = fullText + suffix2;
     }
